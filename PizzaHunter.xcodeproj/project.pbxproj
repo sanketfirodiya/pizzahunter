@@ -50,14 +50,14 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
-		1D8E805D1FEF344A000551B1 /* Models */ = {
+		1D8E805D1FEF344A000551B1 /* Model */ = {
 			isa = PBXGroup;
 			children = (
 				1D8E805E1FEF346A000551B1 /* Restaurant.swift */,
 				1D8E80621FEF356B000551B1 /* RestaurantDetails.swift */,
 				1D8E80671FEF3978000551B1 /* Location.swift */,
 			);
-			path = Models;
+			path = Model;
 			sourceTree = "<group>";
 		};
 		1D8E80641FEF3865000551B1 /* API */ = {
@@ -66,6 +66,15 @@
 				1D8E80651FEF3877000551B1 /* YelpAPI.swift */,
 			);
 			path = API;
+			sourceTree = "<group>";
+		};
+		1DA7850D1FEF3CE0003FC49E /* Controller */ = {
+			isa = PBXGroup;
+			children = (
+				1D6F25B91FEF3341002D9811 /* RestaurantListViewController.swift */,
+				1D8E80601FEF34FB000551B1 /* RestaurantDetailsViewController.swift */,
+			);
+			path = Controller;
 			sourceTree = "<group>";
 		};
 		C39AD2EAAF3CCF91A27EA50D /* Pods */ = {
@@ -100,15 +109,14 @@
 		D2A5F2021F4A9144005CD714 /* PizzaHunter */ = {
 			isa = PBXGroup;
 			children = (
+				1DA7850D1FEF3CE0003FC49E /* Controller */,
 				1D8E80641FEF3865000551B1 /* API */,
-				1D8E805D1FEF344A000551B1 /* Models */,
+				1D8E805D1FEF344A000551B1 /* Model */,
 				D2A5F2201F4A96D0005CD714 /* AppDelegate.swift */,
 				D2A5F2071F4A9144005CD714 /* Main.storyboard */,
 				D2A5F2151F4A924B005CD714 /* LaunchScreen.xib */,
 				D2A5F20A1F4A9144005CD714 /* Assets.xcassets */,
 				D2A5F20F1F4A9144005CD714 /* Info.plist */,
-				1D6F25B91FEF3341002D9811 /* RestaurantListViewController.swift */,
-				1D8E80601FEF34FB000551B1 /* RestaurantDetailsViewController.swift */,
 			);
 			path = PizzaHunter;
 			sourceTree = "<group>";
