@@ -28,17 +28,20 @@
 
 import UIKit
 import Cosmos
+import Siesta
 
-class RestaurantDetailsViewController: UIViewController {
+class RestaurantDetailsViewController: UIViewController, ResourceObserver {
   @IBOutlet weak var nameLabel: UILabel!
   @IBOutlet weak var ratingView: CosmosView!
   @IBOutlet weak var reviewLabel: UILabel!
   @IBOutlet weak var priceLabel: UILabel!
   @IBOutlet weak var phoneLabel: UILabel!
   @IBOutlet weak var addressLabel: UILabel!
-  @IBOutlet weak var imageView1: UIImageView!
-  @IBOutlet weak var imageView2: UIImageView!
-  @IBOutlet weak var imageView3: UIImageView!
+  @IBOutlet weak var imageView1: RemoteImageView!
+  @IBOutlet weak var imageView2: RemoteImageView!
+  @IBOutlet weak var imageView3: RemoteImageView!
+
+  private var statusOverlay = ResourceStatusOverlay()
   
   var restaurantId: String!
   private var restaurantDetail: RestaurantDetails? {
@@ -50,11 +53,30 @@ class RestaurantDetailsViewController: UIViewController {
         reviewLabel.text = String(describing: restaurant.reviewCount) + " reviews"
         priceLabel.text = restaurant.price
         phoneLabel.text = restaurant.displayPhone
+        addressLabel.text = restaurant.location.displayAddress.joined(separator: "\n")
+        imageView1.imageURL = restaurant.photos[0]
+        imageView2.imageURL = restaurant.photos[1]
+        imageView3.imageURL = restaurant.photos[2]
       }
     }
   }
 
   override func viewDidLoad() {
     super.viewDidLoad()
+
+    YelpAPI.sharedInstance.restaurantDetails(restaurantId)
+      .addObserver(self)
+      .addObserver(statusOverlay, owner: self)
+      .loadIfNeeded()
+
+    statusOverlay.embed(in: self)
+  }
+
+  override func viewDidLayoutSubviews() {
+    statusOverlay.positionToCoverParent()
+  }
+
+  func resourceChanged(_ resource: Resource, event: ResourceEvent) {
+    restaurantDetail = resource.typedContent() ?? nil
   }
 }

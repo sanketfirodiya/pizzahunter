@@ -26,20 +26,41 @@
 /// OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
 /// THE SOFTWARE.
 
-import Foundation
+import Siesta
 
-struct Restaurant: Codable {
-  let id: String
-  let name: String
-  let imageUrl: String
+class YelpAPI {
+  static let sharedInstance = YelpAPI()
+  
+  private let service = Service(baseURL: "https://api.yelp.com/v3", standardTransformers: [.text, .image])
 
-  enum CodingKeys: String, CodingKey {
-    case id
-    case name
-    case imageUrl = "image_url"
+  fileprivate init() {
+    service.configure("**") {
+      $0.headers["Authorization"] = "Bearer B6sOjKGis75zALWPa7d2dNiNzIefNbLGGoF75oANINOL80AUhB1DjzmaNzbpzF-b55X-nG2RUgSylwcr_UYZdAQNvimDsFqkkhmvzk6P8Qj0yXOQXmMWgTD_G7ksWnYx"
+      $0.expirationTime = 3600
+    }
+
+    let jsonDecoder = JSONDecoder()
+
+    service.configureTransformer("/businesses/*") {
+      try jsonDecoder.decode(RestaurantDetails.self, from: $0.content)
+    }
+
+    service.configureTransformer("/businesses/search") {
+      try jsonDecoder.decode(SearchResults<Restaurant>.self, from: $0.content).businesses
+    }
   }
-}
 
-struct SearchResults<T: Decodable>: Decodable {
-  let businesses: [T]
+  func restaurantsList() -> Resource {
+    return service
+      .resource("/businesses/search")
+      .withParam("term", "pizza")
+      .withParam("latitude", "37.786882")
+      .withParam("longitude", "-122.399972")
+  }
+
+  func restaurantDetails(_ id: String) -> Resource {
+    return service
+      .resource("/businesses")
+      .child(id)
+  }
 }

@@ -28,18 +28,10 @@
 
 import Foundation
 
-struct Restaurant: Codable {
-  let id: String
-  let name: String
-  let imageUrl: String
+struct Location: Codable {
+  let displayAddress: [String]
 
   enum CodingKeys: String, CodingKey {
-    case id
-    case name
-    case imageUrl = "image_url"
+    case displayAddress = "display_address"
   }
-}
-
-struct SearchResults<T: Decodable>: Decodable {
-  let businesses: [T]
 }

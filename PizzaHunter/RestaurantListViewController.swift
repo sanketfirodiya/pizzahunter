@@ -27,8 +27,9 @@
 /// THE SOFTWARE.
 
 import UIKit
+import Siesta
 
-class RestaurantListViewController: UIViewController {
+class RestaurantListViewController: UIViewController, ResourceObserver {
 
   @IBOutlet weak var tableView: UITableView!
   private var restaurants: [Restaurant] = [] {
@@ -36,9 +37,25 @@ class RestaurantListViewController: UIViewController {
       tableView.reloadData()
     }
   }
+  private var statusOverlay = ResourceStatusOverlay()
 
   override func viewDidLoad() {
     super.viewDidLoad()
+
+    YelpAPI.sharedInstance.restaurantsList()
+      .addObserver(self)
+      .addObserver(statusOverlay, owner: self)
+      .loadIfNeeded()
+
+    statusOverlay.embed(in: self)
+  }
+
+  override func viewDidLayoutSubviews() {
+    statusOverlay.positionToCoverParent()
+  }
+
+  func resourceChanged(_ resource: Resource, event: ResourceEvent) {
+    restaurants = resource.typedContent() ?? []
   }
 }
 
@@ -50,6 +67,21 @@ extension RestaurantListViewController: UITableViewDataSource {
 
   func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
     let cell = tableView.dequeueReusableCell(withIdentifier: "RestaurantListCell", for: indexPath)
+
+    guard indexPath.row <= restaurants.count else {
+      return cell
+    }
+
+    let restaurant = restaurants[indexPath.row]
+
+    if let imageView = cell.viewWithTag(1) as? RemoteImageView {
+      imageView.imageURL = restaurant.imageUrl
+    }
+
+    if let nameLabel = cell.viewWithTag(2) as? UILabel {
+      nameLabel.text = restaurant.name
+    }
+
     return cell
   }
 }

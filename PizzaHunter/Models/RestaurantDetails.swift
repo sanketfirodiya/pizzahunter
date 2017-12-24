@@ -28,7 +28,7 @@
 
 import UIKit
 
-struct RestaurantDetails {
+struct RestaurantDetails: Codable {
   let name: String
   let imageUrl: String
   let rating: CGFloat
@@ -36,5 +36,16 @@ struct RestaurantDetails {
   let price: String
   let displayPhone: String
   let photos: [String]
-  let location: [String]
+  let location: Location
+
+  enum CodingKeys: String, CodingKey {
+    case name
+    case imageUrl = "image_url"
+    case rating
+    case reviewCount = "review_count"
+    case price
+    case displayPhone = "display_phone"
+    case photos
+    case location
+  }
 }
