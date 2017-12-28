@@ -26,12 +26,23 @@
 /// OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
 /// THE SOFTWARE.
 
-import Foundation
+import UIKit
+import Siesta
 
-struct Location: Codable {
-  let displayAddress: [String]
+class RestaurantListTableViewCell: UITableViewCell {
 
-  enum CodingKeys: String, CodingKey {
-    case displayAddress = "display_address"
-  }
+  @IBOutlet weak var nameLabel: UILabel!
+  @IBOutlet weak var iconImageView: RemoteImageView!
+
+  override func awakeFromNib() {
+        super.awakeFromNib()
+        // Initialization code
+    }
+
+    override func setSelected(_ selected: Bool, animated: Bool) {
+        super.setSelected(selected, animated: animated)
+
+        // Configure the view for the selected state
+    }
+    
 }

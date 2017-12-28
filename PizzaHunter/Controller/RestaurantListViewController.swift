@@ -1,4 +1,4 @@
-///// Copyright (c) 2017 Razeware LLC
+/// Copyright (c) 2017 Razeware LLC
 /// 
 /// Permission is hereby granted, free of charge, to any person obtaining a copy
 /// of this software and associated documentation files (the "Software"), to deal
@@ -29,7 +29,7 @@
 import UIKit
 import Siesta
 
-class RestaurantListViewController: UIViewController, ResourceObserver {
+class RestaurantListViewController: UIViewController {
 
   @IBOutlet weak var tableView: UITableView!
   private var restaurants: [Restaurant] = [] {
@@ -42,6 +42,8 @@ class RestaurantListViewController: UIViewController, ResourceObserver {
   override func viewDidLoad() {
     super.viewDidLoad()
 
+    tableView.register(UINib(nibName: "RestaurantListTableViewCell", bundle: nil), forCellReuseIdentifier: "RestaurantListTableViewCell")
+
     YelpAPI.sharedInstance.restaurantsList()
       .addObserver(self)
       .addObserver(statusOverlay, owner: self)
@@ -53,7 +55,10 @@ class RestaurantListViewController: UIViewController, ResourceObserver {
   override func viewDidLayoutSubviews() {
     statusOverlay.positionToCoverParent()
   }
+}
 
+// MARK: - ResourceObserver
+extension RestaurantListViewController: ResourceObserver {
   func resourceChanged(_ resource: Resource, event: ResourceEvent) {
     restaurants = resource.typedContent() ?? []
   }
@@ -66,22 +71,15 @@ extension RestaurantListViewController: UITableViewDataSource {
   }
 
   func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-    let cell = tableView.dequeueReusableCell(withIdentifier: "RestaurantListCell", for: indexPath)
+    let cell = tableView.dequeueReusableCell(withIdentifier: "RestaurantListTableViewCell", for: indexPath) as! RestaurantListTableViewCell
 
     guard indexPath.row <= restaurants.count else {
       return cell
     }
 
     let restaurant = restaurants[indexPath.row]
-
-    if let imageView = cell.viewWithTag(1) as? RemoteImageView {
-      imageView.imageURL = restaurant.imageUrl
-    }
-
-    if let nameLabel = cell.viewWithTag(2) as? UILabel {
-      nameLabel.text = restaurant.name
-    }
-
+    cell.nameLabel.text = restaurant.name
+    cell.iconImageView.imageURL = restaurant.imageUrl
     return cell
   }
 }
@@ -93,7 +91,7 @@ extension RestaurantListViewController: UITableViewDelegate {
       return
     }
 
-    let detailsViewController = UIStoryboard.init(name: "Main", bundle: nil).instantiateViewController(withIdentifier: "RestaurantDetailsViewController") as! RestaurantDetailsViewController
+    let detailsViewController = UIStoryboard(name: "Main", bundle: nil).instantiateViewController(withIdentifier: "RestaurantDetailsViewController") as! RestaurantDetailsViewController
     detailsViewController.restaurantId = restaurants[indexPath.row].id
     navigationController?.pushViewController(detailsViewController, animated: true)
 

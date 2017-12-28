@@ -1,4 +1,4 @@
-///// Copyright (c) 2017 Razeware LLC
+/// Copyright (c) 2017 Razeware LLC
 /// 
 /// Permission is hereby granted, free of charge, to any person obtaining a copy
 /// of this software and associated documentation files (the "Software"), to deal
@@ -54,9 +54,15 @@ class RestaurantDetailsViewController: UIViewController, ResourceObserver {
         priceLabel.text = restaurant.price
         phoneLabel.text = restaurant.displayPhone
         addressLabel.text = restaurant.location.displayAddress.joined(separator: "\n")
-        imageView1.imageURL = restaurant.photos[0]
-        imageView2.imageURL = restaurant.photos[1]
-        imageView3.imageURL = restaurant.photos[2]
+        if restaurant.photos.count > 0 {
+          imageView1.imageURL = restaurant.photos[0]
+        }
+        if restaurant.photos.count > 1 {
+          imageView2.imageURL = restaurant.photos[1]
+        }
+        if restaurant.photos.count > 2 {
+          imageView3.imageURL = restaurant.photos[2]
+        }
       }
     }
   }

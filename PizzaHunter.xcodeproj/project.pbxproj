@@ -8,6 +8,8 @@
 
 /* Begin PBXBuildFile section */
 		1120E425D1677C88E87814D5 /* Pods_PizzaHunter.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B38D42DCB597B873A2AE96F3 /* Pods_PizzaHunter.framework */; };
+		1D20874C1FF580D5000AC091 /* RestaurantListTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1D20874A1FF580D5000AC091 /* RestaurantListTableViewCell.swift */; };
+		1D20874D1FF580D5000AC091 /* RestaurantListTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 1D20874B1FF580D5000AC091 /* RestaurantListTableViewCell.xib */; };
 		1D6F25BA1FEF3341002D9811 /* RestaurantListViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1D6F25B91FEF3341002D9811 /* RestaurantListViewController.swift */; };
 		1D8E805F1FEF346A000551B1 /* Restaurant.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1D8E805E1FEF346A000551B1 /* Restaurant.swift */; };
 		1D8E80611FEF34FB000551B1 /* RestaurantDetailsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1D8E80601FEF34FB000551B1 /* RestaurantDetailsViewController.swift */; };
@@ -22,6 +24,8 @@
 
 /* Begin PBXFileReference section */
 		1290E03424B74D23F95E98B3 /* Pods-PizzaHunter.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-PizzaHunter.release.xcconfig"; path = "Pods/Target Support Files/Pods-PizzaHunter/Pods-PizzaHunter.release.xcconfig"; sourceTree = "<group>"; };
+		1D20874A1FF580D5000AC091 /* RestaurantListTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RestaurantListTableViewCell.swift; sourceTree = "<group>"; };
+		1D20874B1FF580D5000AC091 /* RestaurantListTableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = RestaurantListTableViewCell.xib; sourceTree = "<group>"; };
 		1D6F25B91FEF3341002D9811 /* RestaurantListViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RestaurantListViewController.swift; sourceTree = "<group>"; };
 		1D8E805E1FEF346A000551B1 /* Restaurant.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Restaurant.swift; sourceTree = "<group>"; };
 		1D8E80601FEF34FB000551B1 /* RestaurantDetailsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RestaurantDetailsViewController.swift; sourceTree = "<group>"; };
@@ -50,6 +54,15 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		1D2087491FF580B5000AC091 /* View */ = {
+			isa = PBXGroup;
+			children = (
+				1D20874A1FF580D5000AC091 /* RestaurantListTableViewCell.swift */,
+				1D20874B1FF580D5000AC091 /* RestaurantListTableViewCell.xib */,
+			);
+			path = View;
+			sourceTree = "<group>";
+		};
 		1D8E805D1FEF344A000551B1 /* Model */ = {
 			isa = PBXGroup;
 			children = (
@@ -109,6 +122,7 @@
 		D2A5F2021F4A9144005CD714 /* PizzaHunter */ = {
 			isa = PBXGroup;
 			children = (
+				1D2087491FF580B5000AC091 /* View */,
 				1DA7850D1FEF3CE0003FC49E /* Controller */,
 				1D8E80641FEF3865000551B1 /* API */,
 				1D8E805D1FEF344A000551B1 /* Model */,
@@ -191,6 +205,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				1D20874D1FF580D5000AC091 /* RestaurantListTableViewCell.xib in Resources */,
 				D2A5F20B1F4A9144005CD714 /* Assets.xcassets in Resources */,
 				D2D9196A1F65FEC20011F7B0 /* LaunchScreen.xib in Resources */,
 				D2A5F2091F4A9144005CD714 /* Main.storyboard in Resources */,
@@ -264,6 +279,7 @@
 				D2A5F2211F4A96D0005CD714 /* AppDelegate.swift in Sources */,
 				1D8E80631FEF356B000551B1 /* RestaurantDetails.swift in Sources */,
 				1D6F25BA1FEF3341002D9811 /* RestaurantListViewController.swift in Sources */,
+				1D20874C1FF580D5000AC091 /* RestaurantListTableViewCell.swift in Sources */,
 				1D8E80611FEF34FB000551B1 /* RestaurantDetailsViewController.swift in Sources */,
 				1D8E805F1FEF346A000551B1 /* Restaurant.swift in Sources */,
 				1D8E80681FEF3978000551B1 /* Location.swift in Sources */,
@@ -397,6 +413,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CLANG_ENABLE_MODULES = YES;
+				DEVELOPMENT_TEAM = UMWTWMN2C7;
 				INFOPLIST_FILE = PizzaHunter/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.razeware.PizzaHunter;
@@ -413,6 +430,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CLANG_ENABLE_MODULES = YES;
+				DEVELOPMENT_TEAM = UMWTWMN2C7;
 				INFOPLIST_FILE = PizzaHunter/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.razeware.PizzaHunter;
