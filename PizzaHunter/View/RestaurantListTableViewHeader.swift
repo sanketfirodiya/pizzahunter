@@ -1,4 +1,4 @@
-/// Copyright (c) 2017 Razeware LLC
+///// Copyright (c) 2017 Razeware LLC
 /// 
 /// Permission is hereby granted, free of charge, to any person obtaining a copy
 /// of this software and associated documentation files (the "Software"), to deal
@@ -27,18 +27,45 @@
 /// THE SOFTWARE.
 
 import UIKit
-import Siesta
 
-class RestaurantListTableViewCell: UITableViewCell {
+@objc protocol RestaurantListTableViewHeaderDelegate {
+  func didTapHeaderButton(_ headerView: RestaurantListTableViewHeader)
+}
 
-  static let nib = UINib(nibName: "RestaurantListTableViewCell", bundle: nil)
+class RestaurantListTableViewHeader: UIView {
+  @IBOutlet var view: UIView!
+  @IBOutlet weak var locationButton: UIButton!
 
-  @IBOutlet weak var nameLabel: UILabel!
-  @IBOutlet weak var iconImageView: RemoteImageView!
+  var location: String? {
+    didSet {
+      locationButton.setTitle(location, for: .normal)
+    }
+  }
 
-  override func awakeFromNib() {
-    super.awakeFromNib()
-    iconImageView.layer.cornerRadius = 2
-    iconImageView.layer.masksToBounds = true
+  weak var delegate: RestaurantListTableViewHeaderDelegate?
+
+  init() {
+    super.init(frame: CGRect())
+    commonInit()
+  }
+
+  required init?(coder aDecoder: NSCoder) {
+    super.init(coder: aDecoder)
+    commonInit()
+  }
+
+  func commonInit() {
+    view = Bundle.main.loadNibNamed("RestaurantListTableViewHeader", owner: self, options: nil)?.first as! UIView
+    view.frame = bounds
+    layer.shadowOffset = CGSize(width: 0, height: 1)
+    layer.shadowColor = UIColor.lightGray.cgColor
+    layer.shadowOpacity = 1
+    layer.shadowRadius = 1
+    layer.masksToBounds = false
+    addSubview(view)
+  }
+
+  @IBAction func changeButtonTapped(_ sender: Any) {
+    delegate?.didTapHeaderButton(self)
   }
 }

@@ -50,12 +50,11 @@ class YelpAPI {
     }
   }
 
-  func restaurantsList() -> Resource {
+  func restaurantList(for location: String) -> Resource {
     return service
       .resource("/businesses/search")
       .withParam("term", "pizza")
-      .withParam("latitude", "37.786882")
-      .withParam("longitude", "-122.399972")
+      .withParam("location", location)
   }
 
   func restaurantDetails(_ id: String) -> Resource {

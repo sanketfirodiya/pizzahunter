@@ -31,23 +31,40 @@ import Siesta
 
 class RestaurantListViewController: UIViewController {
 
+  static let locations = ["Atlanta", "Boston", "Chicago", "Los Angeles", "New York", "San Francisco"]
+
   @IBOutlet weak var tableView: UITableView!
+
+  private var statusOverlay = ResourceStatusOverlay()
+
   private var restaurants: [Restaurant] = [] {
     didSet {
       tableView.reloadData()
     }
   }
-  private var statusOverlay = ResourceStatusOverlay()
+
+  var currentLocation: String! {
+    didSet {
+      restaurantsResource = YelpAPI.sharedInstance.restaurantList(for: currentLocation)
+    }
+  }
+
+  var restaurantsResource: Resource? {
+    didSet {
+      oldValue?.removeObservers(ownedBy: self)
+      restaurantsResource?
+        .addObserver(self)
+        .addObserver(statusOverlay, owner: self)
+        .loadIfNeeded()
+    }
+  }
 
   override func viewDidLoad() {
     super.viewDidLoad()
 
-    tableView.register(UINib(nibName: "RestaurantListTableViewCell", bundle: nil), forCellReuseIdentifier: "RestaurantListTableViewCell")
+    currentLocation = RestaurantListViewController.locations.first!
 
-    YelpAPI.sharedInstance.restaurantsList()
-      .addObserver(self)
-      .addObserver(statusOverlay, owner: self)
-      .loadIfNeeded()
+    tableView.register(RestaurantListTableViewCell.nib, forCellReuseIdentifier: "RestaurantListTableViewCell")
 
     statusOverlay.embed(in: self)
   }
@@ -82,6 +99,17 @@ extension RestaurantListViewController: UITableViewDataSource {
     cell.iconImageView.imageURL = restaurant.imageUrl
     return cell
   }
+
+  func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
+    let headerView = RestaurantListTableViewHeader()
+    headerView.delegate = self
+    headerView.location = currentLocation
+    return headerView
+  }
+
+  func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
+    return 50
+  }
 }
 
 // MARK: - UITableViewDelegate
@@ -94,7 +122,23 @@ extension RestaurantListViewController: UITableViewDelegate {
     let detailsViewController = UIStoryboard(name: "Main", bundle: nil).instantiateViewController(withIdentifier: "RestaurantDetailsViewController") as! RestaurantDetailsViewController
     detailsViewController.restaurantId = restaurants[indexPath.row].id
     navigationController?.pushViewController(detailsViewController, animated: true)
-
     tableView.deselectRow(at: indexPath, animated: true)
+  }
+}
+
+// MARK: - RestaurantListTableViewHeaderDelegate
+extension RestaurantListViewController: RestaurantListTableViewHeaderDelegate {
+  func didTapHeaderButton(_ headerView: RestaurantListTableViewHeader) {
+    let locationPicker = UIAlertController(title: "Select location", message: nil, preferredStyle: .actionSheet)
+    for location in RestaurantListViewController.locations {
+      locationPicker.addAction(UIAlertAction(title: location, style: .default) { [weak self] action in
+        guard let strongSelf = self else { return }
+        strongSelf.currentLocation = action.title
+        strongSelf.tableView.reloadData()
+      })
+    }
+    let cancelAction = UIAlertAction(title: "Cancel", style: .cancel, handler: nil)
+    locationPicker.addAction(cancelAction)
+    present(locationPicker, animated: true)
   }
 }
