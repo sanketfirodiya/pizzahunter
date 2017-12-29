@@ -30,7 +30,7 @@ import UIKit
 import Cosmos
 import Siesta
 
-class RestaurantDetailsViewController: UIViewController, ResourceObserver {
+class RestaurantDetailsViewController: UIViewController {
   @IBOutlet weak var nameLabel: UILabel!
   @IBOutlet weak var ratingView: CosmosView!
   @IBOutlet weak var reviewLabel: UILabel!
@@ -81,7 +81,10 @@ class RestaurantDetailsViewController: UIViewController, ResourceObserver {
   override func viewDidLayoutSubviews() {
     statusOverlay.positionToCoverParent()
   }
+}
 
+// MARK: - ResourceObserver
+extension RestaurantDetailsViewController: ResourceObserver {
   func resourceChanged(_ resource: Resource, event: ResourceEvent) {
     restaurantDetail = resource.typedContent() ?? nil
   }
