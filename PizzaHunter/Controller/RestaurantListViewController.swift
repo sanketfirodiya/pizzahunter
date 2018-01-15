@@ -87,7 +87,8 @@ extension RestaurantListViewController: UITableViewDataSource {
   }
 
   func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-    let cell = tableView.dequeueReusableCell(withIdentifier: "RestaurantListTableViewCell", for: indexPath) as! RestaurantListTableViewCell
+    let cell = tableView.dequeueReusableCell(withIdentifier: "RestaurantListTableViewCell",
+                                             for: indexPath) as! RestaurantListTableViewCell
 
     guard indexPath.row <= restaurants.count else {
       return cell
@@ -117,7 +118,8 @@ extension RestaurantListViewController: UITableViewDelegate {
       return
     }
 
-    let detailsViewController = UIStoryboard(name: "Main", bundle: nil).instantiateViewController(withIdentifier: "RestaurantDetailsViewController") as! RestaurantDetailsViewController
+    let detailsViewController = UIStoryboard(name: "Main", bundle: nil)
+      .instantiateViewController(withIdentifier: "RestaurantDetailsViewController") as! RestaurantDetailsViewController
     detailsViewController.restaurantId = restaurants[indexPath.row].id
     navigationController?.pushViewController(detailsViewController, animated: true)
     tableView.deselectRow(at: indexPath, animated: true)
