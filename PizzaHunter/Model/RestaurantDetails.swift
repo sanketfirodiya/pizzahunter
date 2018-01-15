@@ -49,3 +49,11 @@ struct RestaurantDetails: Codable {
     case location
   }
 }
+
+struct Location: Codable {
+  let displayAddress: [String]
+
+  enum CodingKeys: String, CodingKey {
+    case displayAddress = "display_address"
+  }
+}

@@ -17,7 +17,6 @@
 		1D8E80611FEF34FB000551B1 /* RestaurantDetailsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1D8E80601FEF34FB000551B1 /* RestaurantDetailsViewController.swift */; };
 		1D8E80631FEF356B000551B1 /* RestaurantDetails.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1D8E80621FEF356B000551B1 /* RestaurantDetails.swift */; };
 		1D8E80661FEF3877000551B1 /* YelpAPI.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1D8E80651FEF3877000551B1 /* YelpAPI.swift */; };
-		1D8E80681FEF3978000551B1 /* Location.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1D8E80671FEF3978000551B1 /* Location.swift */; };
 		D2A5F2091F4A9144005CD714 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = D2A5F2071F4A9144005CD714 /* Main.storyboard */; };
 		D2A5F20B1F4A9144005CD714 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = D2A5F20A1F4A9144005CD714 /* Assets.xcassets */; };
 		D2A5F2211F4A96D0005CD714 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = D2A5F2201F4A96D0005CD714 /* AppDelegate.swift */; };
@@ -35,7 +34,6 @@
 		1D8E80601FEF34FB000551B1 /* RestaurantDetailsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RestaurantDetailsViewController.swift; sourceTree = "<group>"; };
 		1D8E80621FEF356B000551B1 /* RestaurantDetails.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RestaurantDetails.swift; sourceTree = "<group>"; };
 		1D8E80651FEF3877000551B1 /* YelpAPI.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = YelpAPI.swift; sourceTree = "<group>"; };
-		1D8E80671FEF3978000551B1 /* Location.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Location.swift; sourceTree = "<group>"; };
 		1F7EF93C7B7C028C918AE861 /* Pods-PizzaHunter.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-PizzaHunter.debug.xcconfig"; path = "Pods/Target Support Files/Pods-PizzaHunter/Pods-PizzaHunter.debug.xcconfig"; sourceTree = "<group>"; };
 		B38D42DCB597B873A2AE96F3 /* Pods_PizzaHunter.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_PizzaHunter.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		D2A5F2001F4A9144005CD714 /* PizzaHunter.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = PizzaHunter.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -74,7 +72,6 @@
 			children = (
 				1D8E805E1FEF346A000551B1 /* Restaurant.swift */,
 				1D8E80621FEF356B000551B1 /* RestaurantDetails.swift */,
-				1D8E80671FEF3978000551B1 /* Location.swift */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -290,7 +287,6 @@
 				1D20874C1FF580D5000AC091 /* RestaurantListTableViewCell.swift in Sources */,
 				1D8E80611FEF34FB000551B1 /* RestaurantDetailsViewController.swift in Sources */,
 				1D8E805F1FEF346A000551B1 /* Restaurant.swift in Sources */,
-				1D8E80681FEF3978000551B1 /* Location.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

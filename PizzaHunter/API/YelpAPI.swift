@@ -29,16 +29,18 @@
 import Siesta
 
 class YelpAPI {
+
   static let sharedInstance = YelpAPI()
   
   private let service = Service(baseURL: "https://api.yelp.com/v3", standardTransformers: [.text, .image])
 
   fileprivate init() {
+    
     LogCategory.enabled = [.network, .pipeline, .observers]
 
     service.configure("**") {
       $0.headers["Authorization"] = "Bearer B6sOjKGis75zALWPa7d2dNiNzIefNbLGGoF75oANINOL80AUhB1DjzmaNzbpzF-b55X-nG2RUgSylwcr_UYZdAQNvimDsFqkkhmvzk6P8Qj0yXOQXmMWgTD_G7ksWnYx"
-      $0.expirationTime = 3600
+      $0.expirationTime = 60 * 60
     }
 
     let jsonDecoder = JSONDecoder()
